@@ -1,13 +1,13 @@
 import random
+import os
+import time
 
-def random_chars():
-    result = ''
-    for i in range(32,127):
-        result += chr(i)
-    return ''.join(random.sample(result,len(result)))
+alphabet = ''
 
-alphabet = random_chars()
-key = random_chars()
+for i in range(32,126):
+    alphabet += chr(i)
+
+key = '`1234567890-=qwertyuiop[]\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>? '
 
 def encrypt(message):
     loc = 0
@@ -29,10 +29,18 @@ def decrypt(message):
 
     return result
 
-unencrypted_message = "encryption is fun"
-encrypted_message = encrypt(unencrypted_message)
-decrypted_message = decrypt(encrypted_message)
+def is_english(str):
+    common_words = ['have','for','not','say','with','that','and','the']
+    if any(word in str for word in common_words):
+        return True
+    return False
 
-print(unencrypted_message)
-print(encrypted_message)
-print(decrypted_message)
+path = 'C:\\Users\\bbraun0361\\Desktop\\txt_files'
+
+for filename in os.listdir(path):
+    with open(os.path.join(path, filename),'r') as file:
+        contents = file.read()
+        decrypted_message = decrypt(contents)
+        if is_english(decrypted_message):
+            print(decrypted_message)
+

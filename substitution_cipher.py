@@ -4,10 +4,13 @@ import time
 
 alphabet = ''
 
-for i in range(32,126):
+for i in range(32,127):
     alphabet += chr(i)
 
-key = '`1234567890-=qwertyuiop[]\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>? '
+key = '`1234567890-=qwertyuiop[]\\asdfghjkl;\'zxcvbnm,./~!@#$%^&*()_+QWERTYUIOP{}|ASDFGHJKL:"ZXCVBNM<>? '
+
+print(alphabet)
+print(key)
 
 def encrypt(message):
     loc = 0
@@ -35,12 +38,13 @@ def is_english(str):
         return True
     return False
 
-path = 'C:\\Users\\bbraun0361\\Desktop\\txt_files'
+path = 'C:\\Users\\benja\\Desktop\\txt_files'
 
 for filename in os.listdir(path):
     with open(os.path.join(path, filename),'r') as file:
         contents = file.read()
-        decrypted_message = decrypt(contents)
-        if is_english(decrypted_message):
-            print(decrypted_message)
+        if is_english(decrypt(contents)):
+            print(filename + ' : ' + decrypt(contents))
 
+
+print('done')
